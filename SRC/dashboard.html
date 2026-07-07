@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | GESTIONA!</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <div class="flex items-center space-x-2">
+      <div class="relative flex items-center justify-center w-10 h-10">
+        <span class="text-4xl font-serif font-black text-[#D82299] absolute -translate-x-2 -translate-y-1 z-20">G</span>
+        <span class="text-4xl font-serif font-black text-[#3F2574] absolute translate-x-1.5 translate-y-1.5 z-10 opacity-90">T</span>
+      </div>
+
+      <div class="flex flex-col pl-4 leading-none">
+        <span class="text-2xl font-black tracking-widest">GESTIONA!</span>
+        <span class="text-[9px] text-slate-400 uppercase">Dashboard de Gestión de Tickets</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="contenedor-dashboard">
+
+    <div class="barra">
+      <div class="filtros" id="filtros">
+        </div>
+
+      <div class="botones">
+        <button class="btn-pdf" onclick="descargarPDF()">Descargar PDF</button>
+        <button class="btn-correo" onclick="abrirModal()">Enviar por correo</button>
+        <button class="btn-volver" onclick="generarOtro()">↺ Generar otro</button>
+      </div>
+    </div>
+
+    <p class="vacio" id="vacio" style="display:none;">
+      No hay ningún archivo cargado. Ve a la página de subida para analizar un Excel.
+    </p>
+
+    <div id="dashboardExportable" class="bg-white">
+
+      <div class="seccion-titulo">
+        <h2>Indicadores generales</h2>
+        <span class="contador-resultados" id="contadorResultados">0 de 0 tickets</span>
+      </div>
+
+      <div class="kpis" id="kpis">
+        </div>
+
+      <div class="seccion-titulo">
+        <h2>Análisis visual</h2>
+        <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar filtros</button>
+      </div>
+
+      <div class="graficas" id="graficas">
+        </div>
+
+      <div class="seccion-titulo">
+        <h2> Detalle de tickets</h2>
+      </div>
+
+      <div class="tabla-container">
+        <div class="tabla-scroll">
+          <table id="tabla">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div> </div>
+
+  <div class="modal" id="modalCorreo">
+    <div class="contenido-modal">
+      <span class="cerrar" onclick="cerrarModal()">✕</span>
+      <h3>Enviar Estatus Técnico al Project Manager</h3>
+      <p class="mb-4">Se transmitirá un informe gerencial estructurado con el formato de diseño seleccionado, inyectando el resumen métrico detallado de estados, empresas y rango de fechas actuales.</p>
+      <input type="email" id="inputGmail" placeholder="pm_proyecto@empresa.com" class="border p-2 rounded w-full mb-4">
+      <button class="btn-primary w-full" id="btnConfirmarEnvio" onclick="confirmarEnvio()">Enviar reporte gerencial</button>
+    </div>
+  </div>
+
+  <script src="JS/dashboard.js"></script>
+
+</body>
+</html>

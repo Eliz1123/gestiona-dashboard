@@ -1,4 +1,4 @@
-# 📊 Dashboard de Gestión de Tickets
+# DASBOARD EMPRESARIAL PARA GESTION DE TICKETS
 
 ## 1. Nombre del Proyecto
 
@@ -16,7 +16,6 @@ Además, el sistema ofrece funcionalidades como:
 
 * Filtrado de información por diferentes criterios.
 * Generación de reportes en PDF.
-* Envío automático del reporte por correo electrónico.
 * Almacenamiento temporal de archivos para su procesamiento.
 
 Este proyecto está enfocado en mejorar la toma de decisiones y reducir la acumulación de tickets pendientes.
@@ -73,18 +72,20 @@ archivo.html
 ---
 
 ## 6. Capturas de Pantalla del Proyecto
+<img width="1882" height="924" alt="image" src="https://github.com/user-attachments/assets/1b0d8dd8-bae7-4aee-ae08-01216853d34a" />
+<img width="1655" height="509" alt="image" src="https://github.com/user-attachments/assets/265fa212-808f-459c-9ed4-b5cee5951f15" />
+<img width="1894" height="718" alt="image" src="https://github.com/user-attachments/assets/e6d1167f-03de-447d-96ad-299ae424d6f9" />
+<img width="1868" height="518" alt="image" src="https://github.com/user-attachments/assets/bf7c1a7c-a847-4edf-817a-4bf9e6b1dfbb" />
 
-### 📁 Módulo de carga de archivo
+<img width="1873" height="553" alt="image" src="https://github.com/user-attachments/assets/791e646d-4a1a-4064-bb89-f03e105535f9" />
+<img width="1857" height="530" alt="image" src="https://github.com/user-attachments/assets/610e8629-04a3-4629-968c-ed3511bbd9af" />
+<img width="1838" height="509" alt="image" src="https://github.com/user-attachments/assets/7feee8bb-d086-4dc2-9445-8016ccfb3b5e" />
+<img width="1864" height="887" alt="image" src="https://github.com/user-attachments/assets/85b6bc38-476d-4d45-98fd-7c25788b04df" />
 
-*Agrega aquí una imagen del módulo donde subes el Excel*
 
-### 📊 Dashboard generado
 
-*Agrega aquí una imagen del dashboard con gráficos*
 
-### 📧 Envío por correo
 
-*Agrega aquí una imagen del modal de envío*
 
 ---
 
@@ -119,16 +120,11 @@ node_modules/
 
 Se adjunta evidencia del funcionamiento del sistema mediante:
 
-* Video demostrativo del uso del sistema.
-* Generación de dashboard a partir de archivo Excel.
-* Exportación a PDF.
-* Envío de reporte por correo electrónico.
 
-🔗 *Agregar enlace al video (Drive, YouTube o similar)*
 
 ---
 
-## 👩‍💻 Autor
+## Autora
 
 Brenda Elizabeth Robles Concepción
 Estudiante de Ingeniería en Software

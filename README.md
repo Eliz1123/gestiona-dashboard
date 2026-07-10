@@ -118,7 +118,8 @@ node_modules/
 
 ## 8. Evidencia Funcional del Proyecto
 
-Se adjunta evidencia del funcionamiento del sistema mediante:
+Se adjunta evidencia del funcionamiento del sistema mediante: VIDEO
+https://youtu.be/4J7qwie7VvY 
 
 
 

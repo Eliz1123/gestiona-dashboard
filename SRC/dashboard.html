@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | GESTIONA!</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
+
+  <!-- Seminario de proyectos I BR: gráficas, PDF y correo -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Mejora seminario de proyectos II BR: Supabase (el dashboard ya no lee el Excel, lee los tickets guardados; por eso se quitó SheetJS de aquí) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <!-- Seminario de proyectos I BR: barra superior (el menú y el nombre los agrega JS/supabase.js - Mejora seminario de proyectos II BR) -->
+  <nav class="nav">
+    <div class="flex items-center space-x-2">
+      <div class="relative flex items-center justify-center w-10 h-10">
+        <span class="text-4xl font-serif font-black text-[#D82299] absolute -translate-x-2 -translate-y-1 z-20">G</span>
+        <span class="text-4xl font-serif font-black text-[#3F2574] absolute translate-x-1.5 translate-y-1.5 z-10 opacity-90">T</span>
+      </div>
+
+      <div class="flex flex-col pl-4 leading-none">
+        <span class="text-2xl font-black tracking-widest">GESTIONA!</span>
+        <span class="text-[9px] text-slate-400 uppercase">Dashboard de Gestión de Tickets</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="contenedor-dashboard">
+
+    <div class="barra">
+
+      <!-- Mejora seminario de proyectos II BR: filtros por rango de fechas y situación -->
+      <div class="filtros" style="align-items:flex-end;">
+        <label style="font-size:11px; color:#666; font-weight:600;">Creado desde
+          <input type="date" id="fDesde" style="display:block; width:auto; margin-top:2px; padding:7px 12px; border:1px solid #e5e7eb; border-radius:20px; font-size:13px; background:#fafafa;">
+        </label>
+        <label style="font-size:11px; color:#666; font-weight:600;">Hasta
+          <input type="date" id="fHasta" style="display:block; width:auto; margin-top:2px; padding:7px 12px; border:1px solid #e5e7eb; border-radius:20px; font-size:13px; background:#fafafa;">
+        </label>
+        <label style="font-size:11px; color:#666; font-weight:600;">Situación
+          <select id="fSituacion" style="display:block; margin-top:2px;">
+            <option value="">Todas</option>
+            <option value="pendiente">Pendientes</option>
+            <option value="bloqueado">Bloqueados</option>
+            <option value="hecho">Hechos</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Seminario de proyectos I BR: un filtro por cada columna (Mejora seminario de proyectos II BR: solo las que tienen pocas opciones) -->
+      <div class="filtros" id="filtros">
+        </div>
+
+      <div class="botones">
+        <button class="btn-pdf" onclick="descargarPDF()">Descargar PDF</button>
+        <button class="btn-correo" onclick="abrirModal()">Enviar por correo</button>
+        <!-- Mejora seminario de proyectos II BR: antes decía "Generar otro" -->
+        <button class="btn-volver" onclick="generarOtro()">↺ Subir más tickets</button>
+      </div>
+    </div>
+
+    <!-- Mejora seminario de proyectos II BR: mensaje para cuando no hay tickets guardados -->
+    <p class="vacio" id="vacio" style="display:none;">
+      Todavía no tienes tickets guardados. Ve a «Subir tickets» y carga tu Excel de Jira.
+    </p>
+
+    <div id="dashboardExportable" class="bg-white">
+
+      <!-- Mejora seminario de proyectos II BR: qué filtros se aplicaron (sale también en el PDF) -->
+      <div style="padding:18px 40px 0;">
+        <p id="resumenFiltros" style="font-size:12px; color:#555; font-weight:600;"></p>
+        <p id="pieReporte" style="font-size:11px; color:#999; margin-top:2px;"></p>
+      </div>
+
+      <div class="seccion-titulo">
+        <h2>Indicadores generales</h2>
+        <span class="contador-resultados" id="contadorResultados">0 de 0 tickets</span>
+      </div>
+
+      <div class="kpis" id="kpis">
+        </div>
+
+      <div class="seccion-titulo">
+        <h2>Análisis visual</h2>
+        <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar filtros</button>
+      </div>
+
+      <div class="graficas" id="graficas">
+        </div>
+
+      <div class="seccion-titulo">
+        <h2> Detalle de tickets</h2>
+      </div>
+
+      <div class="tabla-container">
+        <div class="tabla-scroll">
+          <table id="tabla">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div> </div>
+
+  <!-- Seminario de proyectos I BR: ventana para enviar por correo -->
+  <div class="modal" id="modalCorreo">
+    <div class="contenido-modal">
+      <span class="cerrar" onclick="cerrarModal()">✕</span>
+      <h3>Enviar Estatus Técnico al Project Manager</h3>
+      <p class="mb-4">Se transmitirá un informe gerencial estructurado con el formato de diseño seleccionado, inyectando el resumen métrico detallado de estados, empresas y rango de fechas actuales.</p>
+      <input type="email" id="inputGmail" placeholder="pm_proyecto@empresa.com" class="border p-2 rounded w-full mb-4">
+      <button class="btn-primary w-full" id="btnConfirmarEnvio" onclick="confirmarEnvio()">Enviar reporte gerencial</button>
+    </div>
+  </div>
+
+  <!-- Mejora seminario de proyectos II BR: supabase.js va antes que dashboard.js -->
+  <script src="JS/supabase.js"></script>
+  <script src="JS/dashboard.js"></script>
+
+</body>
+</html>

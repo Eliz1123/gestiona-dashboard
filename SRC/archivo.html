@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivo | GESTIONA!</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
+
+  <!-- Mejora seminario de proyectos II BR: SheetJS ahora se usa aquí (antes solo en el dashboard) y Supabase para guardar -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <!-- NAV (Seminario de proyectos I BR; el menú y el nombre los agrega JS/supabase.js - Mejora seminario de proyectos II BR) -->
+  <nav class="nav">
+    <div class="flex items-center space-x-2">
+      <div class="relative flex items-center justify-center w-10 h-10">
+        <span class="text-4xl font-serif font-black text-[#D82299] absolute -translate-x-2 -translate-y-1 z-20">G</span>
+        <span class="text-4xl font-serif font-black text-[#3F2574] absolute translate-x-1.5 translate-y-1.5 z-10 opacity-90">T</span>
+      </div>
+
+      <div class="flex flex-col pl-4 leading-none">
+        <span class="text-2xl font-black tracking-widest">GESTIONA!</span>
+        <span class="text-[9px] text-slate-400 uppercase">Dashboard de Gestión de Tickets</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (Seminario de proyectos I BR) -->
+  <section class="hero upload-hero">
+    <div class="hero-content" style="width:100%; max-width:720px;">
+
+      <h1>Sube tus <span>Tickets</span></h1>
+
+      <p class="descripcion-archivo">
+        Sube el Excel de Jira (.xlsx o .xls). Los tickets nuevos se guardan; los que ya existen no se repiten.
+      </p>
+
+      <!-- CARD -->
+      <div class="upload-card">
+
+        <!-- ZONA DE ARRASTRAR (Seminario de proyectos I BR) -->
+        <label class="upload-box" id="zonaDrop">
+          <input id="inputArchivo" type="file" accept=".xlsx, .xls">
+
+          <div class="upload-content">
+
+            <!-- ICONO -->
+            <img id="iconoExcel"
+              src="https://cdn-icons-png.flaticon.com/512/732/732220.png"
+              class="w-16 mx-auto mb-3 hidden">
+
+            <p id="textoPrincipal">ARRASTRA TU ARCHIVO AQUÍ</p>
+            <span id="textoSecundario">o haz clic para seleccionar</span>
+
+          </div>
+        </label>
+
+        <p id="nombreArchivo" class="mt-3 text-sm text-gray-400">
+          Ningún archivo seleccionado
+        </p>
+
+        <!-- Mejora seminario de proyectos II BR: revisar qué columna es cada dato -->
+        <div id="panelMapa" class="hidden" style="text-align:left;">
+          <p class="text-sm font-bold" style="color:#fff;">Revisa qué columna del Excel corresponde a cada dato</p>
+          <p class="text-xs mt-1" style="color:#cbd5f5;">Ya las detecté solas. Solo el número de ticket es obligatorio; el resto del Excel también se guarda completo.</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+            <label class="text-xs font-semibold" style="color:#e2e8f0;">Número de ticket *
+              <select id="mapTicket" class="sel-mapa"></select>
+            </label>
+            <label class="text-xs font-semibold" style="color:#e2e8f0;">Estado
+              <select id="mapEstado" class="sel-mapa"></select>
+            </label>
+            <label class="text-xs font-semibold" style="color:#e2e8f0;">Descripción o resumen
+              <select id="mapResumen" class="sel-mapa"></select>
+            </label>
+            <label class="text-xs font-semibold" style="color:#e2e8f0;">Prioridad
+              <select id="mapPrioridad" class="sel-mapa"></select>
+            </label>
+            <label class="text-xs font-semibold sm:col-span-2" style="color:#e2e8f0;">Fecha de creación
+              <select id="mapFecha" class="sel-mapa"></select>
+            </label>
+          </div>
+
+          <p id="infoMapa" class="text-sm mt-4" style="color:#fff;"></p>
+        </div>
+
+        <!-- Mejora seminario de proyectos II BR: el botón ahora guarda en la base de datos (antes "Analizar Archivo") -->
+        <button id="btnGuardar" class="btn-main mt-4" disabled style="opacity:.5;">
+          Guardar tickets
+        </button>
+
+        <!-- Mejora seminario de proyectos II BR: resultado de la carga -->
+        <div id="panelResultado" class="hidden" style="text-align:left;" role="status"></div>
+
+      </div>
+
+      <!-- Mejora seminario de proyectos II BR: historial de cargas -->
+      <div id="panelHistorial" class="hidden mt-8" style="text-align:left;">
+        <p class="text-sm font-bold" style="color:#fff;">Tus últimas cargas</p>
+        <ul id="listaCargas" class="mt-2 text-xs" style="color:#cbd5f5;"></ul>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    /* Mejora seminario de proyectos II BR */
+    .sel-mapa { display:block; width:100%; margin-top:4px; padding:8px 10px; border-radius:10px; border:0;
+                background:#fff; color:#222; font-size:13px; font-weight:400; }
+    .sel-mapa:focus { outline:2px solid #D82299; }
+  </style>
+
+  <script src="JS/supabase.js"></script>
+  <script src="JS/archivo.js"></script>
+
+</body>
+</html>

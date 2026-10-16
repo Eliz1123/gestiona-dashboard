@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio | GESTIONA!</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<!-- Mejora seminario de proyectos II BR: página nueva, la bienvenida donde cada usuario elige qué hacer -->
+<body class="bg-slate-50">
+
+  <!-- Seminario de proyectos I BR: barra superior con el logo (el menú y el nombre los agrega JS/supabase.js) -->
+  <nav class="nav">
+    <div class="flex items-center space-x-2">
+      <div class="relative flex items-center justify-center w-10 h-10">
+        <span class="text-4xl font-serif font-black text-[#D82299] absolute -translate-x-2 -translate-y-1 z-20">G</span>
+        <span class="text-4xl font-serif font-black text-[#3F2574] absolute translate-x-1.5 translate-y-1.5 z-10 opacity-90">T</span>
+      </div>
+
+      <div class="flex flex-col pl-4 leading-none">
+        <span class="text-2xl font-black tracking-widest">GESTIONA!</span>
+        <span class="text-[9px] text-slate-400 uppercase">Dashboard de Gestión de Tickets</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-5 pt-32 pb-16">
+
+    <h1 class="text-3xl sm:text-4xl font-black text-[#3F2574]" id="saludo">Hola</h1>
+    <p class="text-slate-500 mt-2">¿Qué quieres hacer hoy?</p>
+
+    <!-- Resumen de lo que ya hay guardado -->
+    <p id="resumen" class="text-sm text-slate-500 mt-4 min-h-[20px]"></p>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
+
+      <a href="archivo.html" id="opSubir"
+        class="block bg-white rounded-2xl p-6 shadow-sm border-t-4 border-[#D82299] hover:shadow-lg transition"
+        style="text-decoration:none;">
+        <h2 class="text-xl font-black text-[#3F2574]">Subir tickets</h2>
+        <p class="text-sm text-slate-600 mt-2">Carga el Excel de Jira. Solo se guardan los tickets que todavía no están registrados.</p>
+        <p class="text-sm font-bold text-[#D82299] mt-5">Subir un Excel</p>
+      </a>
+
+      <a href="dashboard.html"
+        class="block bg-white rounded-2xl p-6 shadow-sm border-t-4 border-[#4C7CFF] hover:shadow-lg transition"
+        style="text-decoration:none;">
+        <h2 class="text-xl font-black text-[#3F2574]">Generar dashboard</h2>
+        <p class="text-sm text-slate-600 mt-2">Elige el rango de fechas, el estado y lo que quieras ver, y descarga el resultado en PDF.</p>
+        <p class="text-sm font-bold text-[#4C7CFF] mt-5">Ver mi dashboard</p>
+      </a>
+
+      <a href="agenda.html" id="opAgenda"
+        class="block bg-white rounded-2xl p-6 shadow-sm border-t-4 border-[#3F2574] hover:shadow-lg transition"
+        style="text-decoration:none;">
+        <h2 class="text-xl font-black text-[#3F2574]">Mi agenda del día</h2>
+        <p class="text-sm text-slate-600 mt-2">Arma tu día con tus tickets pendientes. No necesitas subir nada nuevo si Jira no cambió.</p>
+        <p class="text-sm font-bold text-[#3F2574] mt-5" id="textoAgenda">Abrir mi agenda</p>
+      </a>
+
+    </section>
+  </main>
+
+  <script src="JS/supabase.js"></script>
+  <script src="JS/bienvenida.js"></script>
+</body>
+</html>

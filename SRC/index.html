@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GESTIONA! | Iniciar sesión</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Mejora seminario de proyectos II BR: la tarjeta está dentro de .hero, que pinta h1/p en blanco y grande; aquí se corrige solo para la tarjeta -->
+  <style>
+    .hero main h1 { color:#3F2574; font-size:22px; line-height:1.2; margin:0; }
+    .hero main #subtitulo { color:#64748b; font-size:14px; max-width:none; margin:4px 0 24px; }
+    .hero main #textoAlternar { color:#475569; }
+    .hero main #mensaje { margin:0; }
+  </style>
+</head>
+
+<!-- Mejora seminario de proyectos II BR: la página de inicio ahora es el login (antes era una página informativa) -->
+<body data-publica="true">
+
+  <!-- Seminario de proyectos I BR: el fondo con degradado y destellos es el mismo estilo del hero (clases .hero y .upload-hero) -->
+  <section class="hero upload-hero" style="padding-top:40px; padding-bottom:40px;">
+
+    <!-- Mejora seminario de proyectos II BR: tarjeta de acceso -->
+    <main class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 relative z-10" style="text-align:left; color:#333;">
+
+      <!-- Seminario de proyectos I BR: logo G/T y nombre, igual que en la barra de las demás páginas -->
+      <div class="flex items-center justify-center space-x-2 mb-6">
+        <div class="relative flex items-center justify-center w-10 h-10">
+          <span class="text-4xl font-serif font-black text-[#D82299] absolute -translate-x-2 -translate-y-1 z-20">G</span>
+          <span class="text-4xl font-serif font-black text-[#3F2574] absolute translate-x-1.5 translate-y-1.5 z-10 opacity-90">T</span>
+        </div>
+
+        <div class="flex flex-col pl-4 leading-none">
+          <span class="text-2xl font-black tracking-widest text-black">GESTIONA!</span>
+          <span class="text-[9px] text-slate-400 uppercase">Dashboard de Gestión de Tickets</span>
+        </div>
+      </div>
+
+      <h1 class="text-xl font-black text-[#3F2574] text-center" id="titulo">Ingresa tus credenciales</h1>
+      <p class="text-slate-500 text-sm text-center mt-1 mb-6" id="subtitulo">Entra para ver tus tickets y tu agenda del día.</p>
+
+      <form id="formAcceso" class="flex flex-col gap-4" novalidate>
+
+        <label id="campoNombre" class="text-sm font-bold text-slate-600 hidden">Nombre
+          <input id="nombre" type="text" autocomplete="name" placeholder="Cómo te verán tus compañeros"
+            class="mt-1 w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-normal text-slate-800 focus:outline-none focus:border-[#D82299]"
+            style="margin-top:4px; padding:10px 16px;">
+        </label>
+
+        <label class="text-sm font-bold text-slate-600">Correo
+          <input id="correo" type="email" autocomplete="email" placeholder="tucorreo@empresa.com"
+            class="mt-1 w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-normal text-slate-800 focus:outline-none focus:border-[#D82299]"
+            style="margin-top:4px; padding:10px 16px;">
+        </label>
+
+        <label class="text-sm font-bold text-slate-600">Contraseña
+          <input id="clave" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres"
+            class="mt-1 w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-normal text-slate-800 focus:outline-none focus:border-[#D82299]"
+            style="margin-top:4px; padding:10px 16px;">
+        </label>
+
+        <label id="campoClave2" class="text-sm font-bold text-slate-600 hidden">Repite la contraseña
+          <input id="clave2" type="password" autocomplete="new-password" placeholder="Repite la contraseña"
+            class="mt-1 w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-normal text-slate-800 focus:outline-none focus:border-[#D82299]"
+            style="margin-top:4px; padding:10px 16px;">
+        </label>
+
+        <label class="text-xs text-slate-500 flex items-center gap-2">
+          <input type="checkbox" id="verClave" style="width:auto; margin:0; padding:0; flex:none;"> Mostrar contraseña
+        </label>
+
+        <p id="mensaje" class="text-sm min-h-[20px]" role="alert"></p>
+
+        <button type="submit" id="btnEnviar" class="btn-main w-full" style="padding:12px 20px;">Entrar</button>
+      </form>
+
+      <p class="text-center text-sm text-slate-600 mt-6">
+        <span id="textoAlternar">¿Aún no tienes cuenta?</span>
+        <a href="#" id="alternar" class="font-bold text-[#D82299] hover:underline">Crea una cuenta</a>
+      </p>
+    </main>
+
+    <!-- Seminario de proyectos I BR: pie con los créditos -->
+    <footer style="color:#cbd5f5; position:relative; z-index:10;">
+      <b>GESTIONA 2026 !!!! Brenda Elizabeth Robles Concepcion</b>
+    </footer>
+  </section>
+
+  <script src="JS/supabase.js"></script>
+  <script src="JS/login.js"></script>
+</body>
+</html>

@@ -131,7 +131,7 @@ AGENDA
 ## 7. Evidencia Funcional del Proyecto
 
 Se adjunta evidencia del funcionamiento del sistema mediante: VIDEO
-https://youtu.be/4J7qwie7VvY 
+[https://youtu.be/4J7qwie7VvY ](https://youtu.be/LdEnYS-26DY)
 
 
 
